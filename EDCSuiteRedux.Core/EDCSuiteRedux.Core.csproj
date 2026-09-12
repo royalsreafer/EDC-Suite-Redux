@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>EDCSuiteRedux.Core</AssemblyName>
+    <RootNamespace>EDCSuiteRedux.Core</RootNamespace>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+</Project>

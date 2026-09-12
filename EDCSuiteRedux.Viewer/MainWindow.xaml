@@ -1,0 +1,55 @@
+<Window x:Class="EDCSuiteRedux.Viewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:hex="clr-namespace:WpfHexEditor.HexEditor;assembly=WpfHexEditor.HexEditor"
+        Title="EDC Suite Redux - Binary Viewer"
+        Width="1120"
+        Height="760"
+        MinWidth="820"
+        MinHeight="520"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="ToolbarButton" TargetType="Button">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="14,0" />
+            <Setter Property="Margin" Value="0,0,6,0" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource ToolbarButton}">
+            <Setter Property="Background" Value="#235D91" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="#235D91" />
+        </Style>
+        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource ToolbarButton}">
+            <Setter Property="Background" Value="#E8EEF4" />
+            <Setter Property="Foreground" Value="#233746" />
+            <Setter Property="BorderBrush" Value="#B4C3CF" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FAFBFC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="12,12,12,8">
+            <Button Content="Open Binary" Style="{StaticResource PrimaryButton}" Click="OpenBinaryClick" />
+            <Button Content="Browse Samples" Style="{StaticResource SecondaryButton}" Click="BrowseSamplesClick" />
+            <Button Content="Compare Files" Style="{StaticResource SecondaryButton}" Click="CompareFilesClick" />
+            <Button Content="Merge Files" Style="{StaticResource SecondaryButton}" Click="MergeFilesClick" />
+            <TextBlock x:Name="FileLabel" VerticalAlignment="Center" Text="No binary loaded" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="12,0,12,8">
+            <TextBlock x:Name="SummaryLabel" Text="Choose a .bin file to parse it and inspect its bytes." TextTrimming="CharacterEllipsis" />
+            <TextBlock x:Name="ChecksumLabel" Text="Checksum: not checked" Margin="0,4,0,0" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+
+        <Border Grid.Row="2" Margin="12,0,12,12" BorderBrush="#D5DDE4" BorderThickness="1" Background="White">
+            <hex:HexEditor x:Name="HexEditor" />
+        </Border>
+    </Grid>
+</Window>

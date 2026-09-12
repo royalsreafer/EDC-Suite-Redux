@@ -1,0 +1,37 @@
+## .NET build output
+[Bb]in/
+[Oo]bj/
+
+## Visual Studio and VS Code
+.vs/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Test and coverage output
+TestResults/
+*.trx
+coverage/
+coverage.*
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+## Generated files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db

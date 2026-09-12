@@ -1,0 +1,114 @@
+<Window x:Class="EDCSuiteRedux.Viewer.CompareWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Compare binaries"
+        Width="1360"
+        Height="860"
+        MinWidth="900"
+        MinHeight="600"
+        WindowStartupLocation="CenterOwner"
+        Loaded="CompareWindowLoaded">
+    <Grid Background="#FAFBFC" Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="190" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" x:Name="LeftFileLabel" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+            <TextBlock Grid.Column="1" x:Name="RightFileLabel" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock x:Name="SummaryLabel" VerticalAlignment="Center" />
+            <CheckBox x:Name="DifferencesOnlyCheckBox" Content="Show differences only" Margin="18,0,0,0" VerticalAlignment="Center" Checked="DifferencesOnlyChanged" Unchecked="DifferencesOnlyChanged" />
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="#D5DDE4" BorderThickness="1" Background="White">
+                <ListBox x:Name="LeftRows" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="4,1">
+                                <TextBlock Width="78" Text="{Binding OffsetLabel}" Foreground="#5B6670" />
+                                <ItemsControl ItemsSource="{Binding LeftCells}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="28" Margin="1,0" Padding="2,1" Background="{Binding Background}">
+                                                <TextBlock Text="{Binding Value}" HorizontalAlignment="Center" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" Background="#D5DDE4" />
+            <Border Grid.Column="2" BorderBrush="#D5DDE4" BorderThickness="1" Background="White">
+                <ListBox x:Name="RightRows" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="4,1">
+                                <TextBlock Width="78" Text="{Binding OffsetLabel}" Foreground="#5B6670" />
+                                <ItemsControl ItemsSource="{Binding RightCells}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="28" Margin="1,0" Padding="2,1" Background="{Binding Background}">
+                                                <TextBlock Text="{Binding Value}" HorizontalAlignment="Center" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <GroupBox Grid.Row="3" Header="Differences" Margin="0,10,0,0">
+            <ListBox x:Name="DifferencesList" SelectionChanged="DifferenceSelected" BorderThickness="0">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="4,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding OffsetLabel}" />
+                            <TextBlock Grid.Column="1" Text="{Binding LeftValue}" Foreground="#A12622" />
+                            <TextBlock Grid.Column="2" Text="{Binding RightValue}" Foreground="#235D91" />
+                            <TextBlock Grid.Column="3" Text="{Binding Kind}" Foreground="#5B6670" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+    </Grid>
+</Window>
